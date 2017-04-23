@@ -2,11 +2,14 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "sourceMap": false
     },
-    "files": [
+    "include": [
         "nightmare.d.ts",
         "nightmare-test.ts"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }

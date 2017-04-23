@@ -48,7 +48,9 @@ declare class Nightmare {
 
     wait(): Nightmare;
     wait(ms: number): Nightmare;
+    wait(selector: string): Nightmare;
     wait(fn: () => any, value: any, delay?: number): Nightmare;
+
     header(headers: Nightmare.Headers): Nightmare;
 
     // -- Extract --
