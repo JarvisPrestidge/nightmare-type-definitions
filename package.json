@@ -1,0 +1,12 @@
+{
+  "name": "nightmare-type-definitions",
+  "version": "1.0.0",
+  "description": "Provides typescript type definitions for Nightmare.js version 2.10.0",
+  "main": "nightmare.d.ts",
+  "repository": "https://github.com/JarvisPrestidge/nightmare-type-definitions.git",
+  "author": "Jarvis Prestidge <jarvisprestidge@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nightmare": "^2.10.0"
+  }
+}
