@@ -4,27 +4,151 @@
 
 declare class Nightmare {
 
-    // Constructor
+    // == INFO ==
+
+    /**
+     * Creates an instance of Nightmare.
+     * Takes any number of possible electron or nightmare-specific browser window options.
+     * 
+     * @param {Nightmare.ConstructorOptions} [options] 
+     * 
+     * @memberOf Nightmare
+     */
     constructor(options?: Nightmare.ConstructorOptions)
 
-    // Info
+    /**
+     * Returns the list of available namespaces on the main Nightmare object.
+     * 
+     * @static
+     * @type {string[]}
+     * 
+     * @memberOf Nightmare
+     */
     static namespaces: string[]
+
+    /**
+     * Returns the version of Nightmare.
+     * 
+     * @static
+     * @type {string}
+     * 
+     * @memberOf Nightmare
+     */
     static version: string
+
+    /**
+     * Gets the versions for Electron and Chromium.
+     * 
+     * @returns {Nightmare.EngineVersions} 
+     * 
+     * @memberOf Nightmare
+     */
     engineVersions(): Nightmare.EngineVersions
 
-    // Settings
+    // == SETTINGS ==
+
+    /**
+     * Set the user and password for accessing a web page using basic authentication. 
+     * Be sure to set it before calling .goto(url).
+     * 
+     * @param {string} user 
+     * @param {string} password 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     authentication(user: string, password: string): Nightmare
+
+    /**
+     * Set the useragent used by electron.
+     * 
+     * @param {string} useragent 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     useragent(useragent: string): Nightmare
+
+    /**
+     * Set the viewport size.
+     * 
+     * @param {number} width 
+     * @param {number} height 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     viewport(width: number, height: number): Nightmare
+
+    /**
+     * TODO
+     * 
+     * @param {number} zoomFactor 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     zoom(zoomFactor: number): Nightmare
 
-    // -- Interact --
-    // Also returns a metadata object?
+    // == INTERACT ==
+
+    /**
+     * Load the page at url. Optionally, a headers hash can be supplied to set headers on the goto request.
+     * Also returns a metadata object with response metrics.
+     * 
+     * @param {string} url 
+     * @param {Nightmare.Headers} [headers] 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     goto(url: string, headers?: Nightmare.Headers): Nightmare
+
+    /**
+     * Go back to the previous page.
+     * 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     back(): Nightmare
+
+    /**
+     * Go forward to the next page.
+     * 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     forward(): Nightmare
+
+    /**
+     * Refresh the current page.
+     * 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     refresh(): Nightmare
+
+    /**
+     * Clicks the selector element once.
+     * 
+     * @param {string} selector 
+     * @returns {Nightmare} 
+     * 
+     * @memberOf Nightmare
+     */
     click(selector: string): Nightmare
+
+    /**
+     * 
+     * 
+     * @param {string} selector 
+     * @returns {Nightmare} 
+     * 
+     * @memberof Nightmare
+     */
     mousedown(selector: string): Nightmare
     mouseover(selector: string): Nightmare
     mouseup(selector: string): Nightmare
@@ -46,10 +170,11 @@ declare class Nightmare {
     evaluate<R>(fn: () => R, cb: (result: R) => void): Nightmare
     evaluate(fn: () => void): Nightmare
 
-    wait(): Nightmare
-    wait(ms: number): Nightmare
-    wait(selector: string): Nightmare
+    // Wait
     wait(fn: () => any, value: any, delay?: number): Nightmare
+    wait(selector: string): Nightmare
+    wait(ms: number): Nightmare
+    wait(): Nightmare
 
     header(header: Nightmare.Headers): Nightmare
 
@@ -142,7 +267,7 @@ declare class Nightmare {
     removeListener(event: string, cb: () => void): Nightmare
     screenshot(path?: string, clip?: Nightmare.Rectangle): Nightmare
     html(path: string, saveType: Nightmare.SaveType): Nightmare
-    pdf(path: string, options: Nightmare.PDFOptions): Nightmare
+    pdf(path: string, options?: Nightmare.PDFOptions): Nightmare
     title(cb: (title: string) => void): Nightmare
     url(cb: (url: string) => void): Nightmare
     path(cb: (url: string) => void): Nightmare
@@ -165,6 +290,10 @@ declare class Nightmare {
     evaluate_now(fn: () => void): Nightmare
 
     static action(...args: any[]): Nightmare
+
+    catch<T>(reject?: (error: any) => T): Promise<T>
+    // Native method no parameter or return type inference available
+    then<T>(fulfill?: (value: any) => T, reject?: (value: any) => T): Promise<T>
 }
 
 declare namespace Nightmare {
@@ -273,46 +402,45 @@ declare namespace Nightmare {
 
     interface Paths {
         // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
-        home ?: string;
-        appData ?: string;
-        userData ?: string;
-        temp ?: string;
-        exe ?: string;
-        module ?: string;
-        desktop ?: string;
-        documents ?: string;
-        downloads ?: string;
-        music ?: string;
-        pictures ?: string;
-        videos ?: string;
+        home?: string;
+        appData?: string;
+        userData?: string;
+        temp?: string;
+        exe?: string;
+        module?: string;
+        desktop?: string;
+        documents?: string;
+        downloads?: string;
+        music?: string;
+        pictures?: string;
+        videos?: string;
     }
-
 
     interface Switches {
         // https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
-        'ignore-connection-limit' ?: string;
-        'disable-http-cache' ?: boolean;
-        'disable-http2' ?: boolean;
-        'remote-debugging-port' ?: number;
-        'js-flags' ?: string;
-        'proxy-server' ?: string;
-        'proxy-bypass-list' ?: string;
-        'proxy-pac-url' ?: string;
-        'no-proxy-server' ?: boolean;
-        'host-rules' ?: string;
-        'host-resolve-rules' ?: string;
-        'auth-server-whitelist' ?: string;
-        'auth-negotiate-delegate-whitelist' ?: string;
-        'ignore-certificate-errors' ?: string;
-        'ppapi-flash-path' ?: string;
-        'ppapi-flash-version' ?: string;
-        'log-net-log' ?: string;
-        'ssl-version-fallback-min' ?: string;
-        'cipher-suite-blacklist' ?: string;
-        'disable-renderer-backgrounding' ?: string;
-        'enable-logging' ?: boolean;
-        'v' ?: string;
-        'vmodule' ?: string;
+        'ignore-connection-limit'?: string;
+        'disable-http-cache'?: boolean;
+        'disable-http2'?: boolean;
+        'remote-debugging-port'?: number;
+        'js-flags'?: string;
+        'proxy-server'?: string;
+        'proxy-bypass-list'?: string;
+        'proxy-pac-url'?: string;
+        'no-proxy-server'?: boolean;
+        'host-rules'?: string;
+        'host-resolve-rules'?: string;
+        'auth-server-whitelist'?: string;
+        'auth-negotiate-delegate-whitelist'?: string;
+        'ignore-certificate-errors'?: string;
+        'ppapi-flash-path'?: string;
+        'ppapi-flash-version'?: string;
+        'log-net-log'?: string;
+        'ssl-version-fallback-min'?: string;
+        'cipher-suite-blacklist'?: string;
+        'disable-renderer-backgrounding'?: string;
+        'enable-logging'?: boolean;
+        'v'?: string;
+        'vmodule'?: string;
     }
 
 
@@ -628,18 +756,6 @@ declare namespace Nightmare {
         deviceId: string
     }
 
-    class Promise {
-        constructor(p0: any)
-        // Native method no parameter or return type inference available
-        catch(p0: any): any
-        // Native method no parameter or return type inference available
-        then(p0: any, p1: any): any
-        static all(p0: any): any
-        static race(p0: any): any
-        static reject(p0: any): any
-        static resolve(p0: any): any
-    }
-
     // -- Supporting types --
 
     type Rectangle = {
@@ -679,5 +795,5 @@ declare namespace Nightmare {
 
 
 declare module 'nightmare' {
-	export = Nightmare
+    export = Nightmare
 }

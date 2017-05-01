@@ -1,25 +1,27 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "taskName": "watch",
-            "command": "tsc",
-            "isShellCommand": true,
-            "args": ["-w", "-p", "."],
-            "isBackground": true,
-            "showOutput": "silent",
-            "problemMatcher": "$tsc-watch"
-        },
-        {
-            "taskName": "run",
-            "command": "node",
-            "args": [
-                "dist/nightmare-tests.js"
-            ]
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "taskName": "watch",
+      "command": "tsc",
+      "isShellCommand": true,
+      "args": [
+        "-w",
+        "-p",
+        "."
+      ],
+      "isBackground": true,
+      "showOutput": "silent",
+      "problemMatcher": "$tsc-watch"
+    },
+    {
+      "taskName": "run",
+      "command": "node",
+      "args": [
+        "dist/nightmare-tests.js"
+      ]
+    }
+  ]
 }
-                // "executable": "C:\\progra~1\\cmder\\vendor\\git-for-windows\\bin\\bash.exe",
-                // "args": ["-c"]
