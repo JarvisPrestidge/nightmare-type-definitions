@@ -13,6 +13,7 @@
                 "."
             ],
             "isBackground": true,
+            "promptOnClose": true,
             "showOutput": "silent",
             "problemMatcher": "$tsc-watch"
         },

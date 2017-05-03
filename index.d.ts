@@ -9,38 +9,38 @@ declare class Nightmare {
     /**
      * Creates an instance of Nightmare.
      * Takes any number of possible electron or nightmare-specific browser window options.
-     * 
-     * @param {Nightmare.ConstructorOptions} [options] 
-     * 
+     *
+     * @param {Nightmare.ConstructorOptions} [options]
+     *
      * @memberOf Nightmare
      */
     constructor(options?: Nightmare.ConstructorOptions)
 
     /**
      * Returns the list of available namespaces on the main Nightmare object.
-     * 
+     *
      * @static
      * @type {string[]}
-     * 
+     *
      * @memberOf Nightmare
      */
     static namespaces: string[]
 
     /**
      * Returns the version of Nightmare.
-     * 
+     *
      * @static
      * @type {string}
-     * 
+     *
      * @memberOf Nightmare
      */
     static version: string
 
     /**
      * Gets the versions for Electron and Chromium.
-     * 
-     * @returns {Nightmare.EngineVersions} 
-     * 
+     *
+     * @returns {Nightmare.EngineVersions}
+     *
      * @memberOf Nightmare
      */
     engineVersions(): Nightmare.EngineVersions
@@ -48,44 +48,44 @@ declare class Nightmare {
     // == SETTINGS ==
 
     /**
-     * Set the user and password for accessing a web page using basic authentication. 
+     * Set the user and password for accessing a web page using basic authentication.
      * Be sure to set it before calling .goto(url).
-     * 
-     * @param {string} user 
-     * @param {string} password 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @param {string} user
+     * @param {string} password
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     authentication(user: string, password: string): Nightmare
 
     /**
      * Set the useragent used by electron.
-     * 
-     * @param {string} useragent 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @param {string} useragent
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     useragent(useragent: string): Nightmare
 
     /**
      * Set the viewport size.
-     * 
-     * @param {number} width 
-     * @param {number} height 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @param {number} width
+     * @param {number} height
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     viewport(width: number, height: number): Nightmare
 
     /**
      * TODO
-     * 
-     * @param {number} zoomFactor 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @param {number} zoomFactor
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     zoom(zoomFactor: number): Nightmare
@@ -95,94 +95,229 @@ declare class Nightmare {
     /**
      * Load the page at url. Optionally, a headers hash can be supplied to set headers on the goto request.
      * Also returns a metadata object with response metrics.
-     * 
-     * @param {string} url 
-     * @param {Nightmare.Headers} [headers] 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @param {string} url
+     * @param {Nightmare.Headers} [headers]
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     goto(url: string, headers?: Nightmare.Headers): Nightmare
 
     /**
      * Go back to the previous page.
-     * 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     back(): Nightmare
 
     /**
      * Go forward to the next page.
-     * 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     forward(): Nightmare
 
     /**
      * Refresh the current page.
-     * 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     refresh(): Nightmare
 
     /**
      * Clicks the selector element once.
-     * 
-     * @param {string} selector 
-     * @returns {Nightmare} 
-     * 
+     *
+     * @param {string} selector
+     * @returns {Nightmare}
+     *
      * @memberOf Nightmare
      */
     click(selector: string): Nightmare
 
     /**
-     * 
-     * 
-     * @param {string} selector 
-     * @returns {Nightmare} 
-     * 
+     * Mousedown the selector element once.
+     *
+     * @param {string} selector
+     * @returns {Nightmare}
+     *
      * @memberof Nightmare
      */
     mousedown(selector: string): Nightmare
-    mouseover(selector: string): Nightmare
+
+    /**
+     * Mouseup the selector element once.
+     *
+     * @param {string} selector
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     mouseup(selector: string): Nightmare
-    // Empty values for text will clear the input box
+
+    /**
+     * Mouseover the selector element once.
+     *
+     * @param {string} selector
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
+    mouseover(selector: string): Nightmare
+
+    /**
+     * Enters the text provided into the selector element. Empty or falsey values provided for text will clear the selector's value.
+     *
+     * @param {string} selector
+     * @param {string} [text]
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     type(selector: string, text?: string): Nightmare
-    // Faster than type() but doesn't emit keyboard events
+
+    /**
+     * Similar to .type(). .insert() enters the text provided into the selector element.
+     * Empty or falsey values provided for text will clear the selector's value.
+     * .insert() is faster than .type() but does not trigger the keyboard events.
+     *
+     * @param {string} selector
+     * @param {string} [text]
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     insert(selector: string, text?: string): Nightmare
+
+    /**
+     * Checks the selector checkbox element.
+     *
+     * @param {string} selector
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     check(selector: string): Nightmare
+
+    /**
+     * unchecks the selector checkbox element.
+     *
+     * @param {string} selector
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     uncheck(selector: string): Nightmare
-    select(selector: string, option: string): Nightmare
+
+    /**
+     * Changes the selector dropdown element to the option with attribute [value=option]
+     *
+     * @param {string} selector
+     * @param {string} option
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
+    select(selector: string, option?: string): Nightmare
+
+    /**
+     * Scrolls the page to desired position. top and left are always relative to the top left corner of the document.
+     *
+     * @param {number} top
+     * @param {number} left
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     scrollTo(top: number, left: number): Nightmare
+
+    /**
+     * Inject a local file onto the current page. The file type must be either js or css.
+     *
+     * @param {string} type
+     * @param {string} file
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     inject(type: string, file: string): Nightmare
 
-    // Evaluate overloads
-    evaluate<T1, T2, T3, R>(fn: (arg1: T1, arg2: T2, arg3: T3) => R, cb: (result: R) => void, arg1: T1, arg2: T2, arg3: T3): Nightmare
-    evaluate<T1, T2, R>(fn: (arg1: T1, arg2: T2) => R, cb: (result: R) => void, arg1: T1, arg2: T2): Nightmare
-    evaluate<T, R>(fn: (arg: T) => R, cb: (result: R) => void, arg: T): Nightmare
-    evaluate<T>(fn: (arg: T) => void, cb: () => void, arg: T): Nightmare
-    evaluate<R>(fn: () => R, cb: (result: R) => void): Nightmare
+    /**
+     * Invokes fn on the page with arg1, arg2,.... All the args are optional. On completion it returns the return value of fn.
+     * Useful for extracting information from the page. Here's an example:
+     *
+     * @param {() => void} fn
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     evaluate(fn: () => void): Nightmare
+    evaluate<R>(fn: () => R, cb: (result: R) => void): Nightmare
+    evaluate<T>(fn: (arg: T) => void, cb: () => void, arg: T): Nightmare
+    evaluate<T, R>(fn: (arg: T) => R, cb: (result: R) => void, arg: T): Nightmare
+    evaluate<T1, T2, R>(fn: (arg1: T1, arg2: T2) => R, cb: (result: R) => void, arg1: T1, arg2: T2): Nightmare
+    evaluate<T1, T2, T3, R>(fn: (arg1: T1, arg2: T2, arg3: T3) => R, cb: (result: R) => void, arg1: T1, arg2: T2, arg3: T3): Nightmare
 
-    // Wait
-    wait(fn: () => any, value: any, delay?: number): Nightmare
-    wait(selector: string): Nightmare
-    wait(ms: number): Nightmare
+    /**
+     * Wait for ms milliseconds e.g. .wait(5000)
+     *
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     wait(): Nightmare
+    wait(ms: number): Nightmare
+    wait(selector: string, delay?: number): Nightmare
+    wait(fn: () => any, value: any, delay?: number): Nightmare
 
+    /**
+     * Add a header override for all HTTP requests. If header is undefined, the header overrides will be reset.
+     *
+     * @param {Nightmare.Headers} header
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     header(header: Nightmare.Headers): Nightmare
 
-    // -- Extract --
+    /**
+     * Returns whether the selector exists or not on the page.
+     *
+     * @param {string} selector
+     * @param {(result: boolean) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     exists(selector: string, cb: (result: boolean) => void): Nightmare
+
+    /**
+     * Returns whether the selector is visible or not
+     *
+     * @param {string} selector
+     * @param {(result: boolean) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     visible(selector: string, cb: (result: boolean) => void): Nightmare
 
-    // On different web content events
+    /**
+     * Capture page events with the callback. You have to call .on() before calling .goto().
+     * Supported events are documented here: http://electron.atom.io/docs/api/web-contents/#instance-events
+     *
+     * @param {string} event
+     * @param {() => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     on(event: string, cb: () => void): Nightmare
     on(event: 'did-finish-load', cb: () => void): Nightmare
     on(event: 'did-fail-load', cb: (event: Event, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean) => void): Nightmare
@@ -216,14 +351,31 @@ declare class Nightmare {
     on(event: 'select-bluetooth-device', cb: (event: Event, deviceList: Nightmare.BluetoothDevice[], cb: (deviceId: string) => void) => void): Nightmare
     on(event: 'paint', cb: (event: Event, dirtyRect: Nightmare.Rectangle, image: any) => void): Nightmare
 
-    // Page events
+    /**
+     * This event is triggered if any javascript exception is thrown on the page.
+     * But this event is not triggered if the injected javascript code (e.g. via .evaluate()) is throwing an exception.
+     *
+     * @param {'page'} event
+     * @param {(type: 'error', message: string, stack: string) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     on(event: 'page', cb: (type: 'error', message: string, stack: string) => void): Nightmare
     on(event: 'page', cb: (type: 'alert', message: string) => void): Nightmare
     on(event: 'page', cb: (type: 'prompt', message: string, response: object) => void): Nightmare
     on(event: 'page', cb: (type: 'confirm', message: string, response: object) => void): Nightmare
     on(event: 'console', cb: (type: string, args?: any) => void): Nightmare
 
-    // Once - web content events
+    /**
+     * Similar to .on(), but captures page events with the callback one time.
+     *
+     * @param {string} event
+     * @param {() => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     once(event: string, cb: () => void): Nightmare
     once(event: 'did-finish-load', cb: () => void): Nightmare
     once(event: 'did-fail-load', cb: (event: Event, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean) => void): Nightmare
@@ -257,28 +409,153 @@ declare class Nightmare {
     once(event: 'select-bluetooth-device', cb: (event: Event, deviceList: Nightmare.BluetoothDevice[], cb: (deviceId: string) => void) => void): Nightmare
     once(event: 'paint', cb: (event: Event, dirtyRect: Nightmare.Rectangle, image: any) => void): Nightmare
 
-    // Page events
+    /**
+     * This event is triggered if any javascript exception is thrown on the page.
+     * But this event is not triggered if the injected javascript code (e.g. via .evaluate()) is throwing an exception.
+     *
+     * @param {'page'} event
+     * @param {(type: 'any', message: string, stack?: string) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     once(event: 'page', cb: (type: 'error', message: string, stack: string) => void): Nightmare
     once(event: 'page', cb: (type: 'alert', message: string) => void): Nightmare
     once(event: 'page', cb: (type: 'prompt', message: string, response: object) => void): Nightmare
     once(event: 'page', cb: (type: 'confirm', message: string, response: object) => void): Nightmare
     once(event: 'console', cb: (type: string, args?: any) => void): Nightmare
 
+    /**
+     * Removes a given listener callback for an event.
+     *
+     * @param {string} event
+     * @param {() => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     removeListener(event: string, cb: () => void): Nightmare
+
+    /**
+     * Takes a screenshot of the current page. Useful for debugging. The output is always a png. Both arguments are optional.
+     * If path is provided, it saves the image to the disk. Otherwise it returns a Buffer of the image data.
+     * If clip is provided (as documented here), the image will be clipped to the rectangle.
+     *
+     * @param {string} [path]
+     * @param {Nightmare.Rectangle} [clip]
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     screenshot(path?: string, clip?: Nightmare.Rectangle): Nightmare
+
+    /**
+     * Save the current page as html as files to disk at the given path. Save type options are here.
+     *
+     * @param {string} path
+     * @param {Nightmare.SaveType} saveType
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     html(path: string, saveType: Nightmare.SaveType): Nightmare
+
+    /**
+     * Saves a PDF to the specified path.
+     * Options are here: https://github.com/electron/electron/blob/v1.4.4/docs/api/web-contents.md#contentsprinttopdfoptions-callback
+     *
+     * @param {string} path
+     * @param {Nightmare.PDFOptions} [options]
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     pdf(path: string, options?: Nightmare.PDFOptions): Nightmare
+
+    /**
+     * Returns the title of the current page.
+     *
+     * @param {(title: string) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     title(cb: (title: string) => void): Nightmare
+
+    /**
+     *
+     *
+     * @param {(url: string) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     url(cb: (url: string) => void): Nightmare
+
+    /**
+     *
+     *
+     * @param {(url: string) => void} cb
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     path(cb: (url: string) => void): Nightmare
 
-    // -- Cookies --
-    // Needs work
-    cookies(): Nightmare
+    /**
+     * Manipulate cookies using the following sub-functions:
+     * get(query?: Cookie): Promise<Cookie[]>;
+     * set(name: string, value: string): Nightmare;
+     * get(cookie: Cookie): Nightmare;
+     * clearAll(): Nightmare;
+     *
+     * @returns {Nightmare.Cookies}
+     *
+     * @memberof Nightmare
+     */
+    cookies(): Nightmare.Cookies
 
+    /**
+     * nightmare.use is useful for reusing a set of tasks on an instance. Check out nightmare-swiftly for some examples.
+     *
+     * @param {(nightmare: Nightmare) => void} plugin
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     use(plugin: (nightmare: Nightmare) => void): Nightmare
+
+    /**
+     * Runs an instance of nightmare
+     *
+     * @param {(err: any, nightmare: Nightmare) => void} [cb]
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     run(cb?: (err: any, nightmare: Nightmare) => void): Nightmare
+
+    /**
+     * Clears all queued operations, kills the electron process, and passes error message or 'Nightmare Halted' to an unresolved promise.
+     * Done will be called after the process has exited.
+     *
+     * @param {({} | string)} [error]
+     * @param {*} [done]
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     halt(error?: {} | string, done?: any): Nightmare
+
+    /**
+     * Complete any queue operations, disconnect and close the electron process.
+     * Note that if you're using promises, .then() must be called after .end() to run the .end() task.
+     * Also note that if using a .end() callback, the .end() call is equivalent to calling .end() followed by .then(fn)
+     *
+     * @returns {Nightmare}
+     *
+     * @memberof Nightmare
+     */
     end(): Nightmare
 
     // Evaluate_now overloads
@@ -301,18 +578,64 @@ declare namespace Nightmare {
     interface ConstructorOptions extends BrowserWindowOptions {
         // Nightmare specifc options documented here:
         // https://github.com/segmentio/nightmare/blob/2f5c4b9d97f4cfc29300b9a33c0caf9b048a2997/Readme.md#nightmareoptions
+
+        /**
+         * This will throw an exception if the .wait() didn't return true within the set timeframe.
+         */
         waitTimeout?: number
+        /**
+         * This will throw an exception if the .goto() didn't finish loading within the set timeframe.
+         * Note that, even though goto normally waits for all the resources on a page to load, a timeout exception is only raised if the DOM itself has not yet loaded.
+         */
         goTimeout?: number
+        /**
+         * This will force Nightmare to move on if a page transition caused by an action (eg, .click()) didn't finish within the set timeframe.
+         * If loadTimeout is shorter than gotoTimeout, the exceptions thrown by gotoTimeout will be suppressed.
+         */
         loadTimeout?: number
+        /**
+         * The maxiumum amount of time to wait for an .evaluate() statement to complete.
+         */
         executionTimeout?: number
+        /**
+         * The default system paths that Electron knows about.
+         * Here's a list of available paths: https://github.com/atom/electron/blob/master/docs/api/app.md#appgetpathname
+         */
         paths?: Nightmare.Paths
-        swithes?: object
+        /**
+         * The command line switches used by the Chrome browser that are also supported by Electron.
+         * Here's a list of supported Chrome command line switches: https://github.com/atom/electron/blob/master/docs/api/chrome-command-line-switches.md
+         */
+        switches?: object
+        /**
+         * The path to prebuilt Electron binary. This is useful for testing on different version Electron.
+         * Note that Nightmare only supports the version this package depending on. Please use this option at your own risk.
+         */
         electronPath?: string
+        /**
+         * A boolean to optionally show the Electron icon in the dock (defaults to false). This is useful for testing purposes.
+         */
         dock?: boolean
+        /**
+         * Optionally show the DevTools in the Electron window using true, or use an object hash containing mode: 'detach' to show in a separate window.
+         * The hash gets passed to contents.openDevTools() to be handled. This is also useful for testing purposes. Note that this option is honored only if show is set to true.
+         */
         openDevTools?: boolean
+        /**
+         * How long to wait between keystrokes when using .type().
+         */
         typeInterval?: number
+        /**
+         * How long to wait between checks for the .wait() condition to be successful.
+         */
         pollInterval?: number
+        /**
+         * Defines the number of times to retry an authentication when set up with .authenticate().
+         */
         maxAuthRetries?: number
+        /**
+         * By default, Nightmare uses default native ES6 promises. You can plug in your favorite ES6-style promises library like bluebird or q for convenience!
+         */
         promise?: any
     }
 
@@ -320,129 +643,383 @@ declare namespace Nightmare {
     interface BrowserWindowOptions {
         // Electron specific options documented here:
         // https://github.com/atom/electron/blob/master/docs/api/browser-window.md#new-browserwindowoptions
-        width?: number
-        height?: number
-        x?: number
-        y?: number
-        useContentSize?: boolean
-        switches?: Nightmare.Switches
-        center?: boolean
-        minWidth?: number
-        minHeight?: number
-        maxWidth?: number
-        maxHeight?: number
-        resizable?: boolean
-        movable?: boolean
-        minimizable?: boolean
-        maximizable?: boolean
-        closable?: boolean
-        focusable?: boolean
-        alwaysOnTop?: boolean
-        fullscreen?: boolean
-        fullscreenable?: boolean
-        skipTaskbar?: boolean
-        kiosk?: boolean
-        title?: string
-        icon?: string
-        show?: boolean
-        frame?: boolean
-        parent?: any
-        modal?: boolean
-        acceptFirstMouse?: boolean
-        disableAutoHideCursor?: boolean
-        autoHideMenuBar?: boolean
-        enableLargerThanScreen?: boolean
-        backgroundColor?: string
-        hasShadow?: boolean
-        darkTheme?: boolean
-        transparent?: boolean
-        type?: BrowserWindowType
-        titleBarStyle?: 'default' | 'hidden' | 'hidden-inset'
-        thickFrame?: boolean
-        vibrancy?: VibrancyType
-        webPreferences?: WebPreferences
+        /**
+         * Window’s width in pixels.
+         * Default: 800.
+         */
+        width?: number;
+		/**
+		 * Window’s height in pixels.
+		 * Default: 600.
+		 */
+        height?: number;
+		/**
+		 * Window’s left offset from screen.
+		 * Default: center the window.
+		 */
+        x?: number;
+		/**
+		 * Window’s top offset from screen.
+		 * Default: center the window.
+		 */
+        y?: number;
+		/**
+		 * The width and height would be used as web page’s size, which means
+		 * the actual window’s size will include window frame’s size and be slightly larger.
+		 * Default: false.
+		 */
+        useContentSize?: boolean;
+		/**
+		 * Show window in the center of the screen.
+		 * Default: true
+		 */
+        center?: boolean;
+		/**
+		 * Window’s minimum width.
+		 * Default: 0.
+		 */
+        minWidth?: number;
+		/**
+		 * Window’s minimum height.
+		 * Default: 0.
+		 */
+        minHeight?: number;
+		/**
+		 * Window’s maximum width.
+		 * Default: no limit.
+		 */
+        maxWidth?: number;
+		/**
+		 * Window’s maximum height.
+		 * Default: no limit.
+		 */
+        maxHeight?: number;
+		/**
+		 * Whether window is resizable.
+		 * Default: true.
+		 */
+        resizable?: boolean;
+		/**
+		 * Whether window is movable.
+		 * Note: This is not implemented on Linux.
+		 * Default: true.
+		 */
+        movable?: boolean;
+		/**
+		 * Whether window is minimizable.
+		 * Note: This is not implemented on Linux.
+		 * Default: true.
+		 */
+        minimizable?: boolean;
+		/**
+		 * Whether window is maximizable.
+		 * Note: This is not implemented on Linux.
+		 * Default: true.
+		 */
+        maximizable?: boolean;
+		/**
+		 * Whether window is closable.
+		 * Note: This is not implemented on Linux.
+		 * Default: true.
+		 */
+        closable?: boolean;
+		/**
+		 * Whether the window can be focused.
+		 * On Windows setting focusable: false also implies setting skipTaskbar: true.
+		 * On Linux setting focusable: false makes the window stop interacting with wm,
+		 * so the window will always stay on top in all workspaces.
+		 * Default: true.
+		 */
+        focusable?: boolean;
+		/**
+		 * Whether the window should always stay on top of other windows.
+		 * Default: false.
+		 */
+        alwaysOnTop?: boolean;
+		/**
+		 * Whether the window should show in fullscreen.
+		 * When explicitly set to false the fullscreen button will be hidden or disabled on macOS.
+		 * Default: false.
+		 */
+        fullscreen?: boolean;
+		/**
+		 * Whether the window can be put into fullscreen mode.
+		 * On macOS, also whether the maximize/zoom button should toggle full screen mode or maximize window.
+		 * Default: true.
+		 */
+		fullscreenable?: boolean;
+		/**
+		 * Whether to show the window in taskbar.
+		 * Default: false.
+		 */
+		skipTaskbar?: boolean;
+		/**
+		 * The kiosk mode.
+		 * Default: false.
+		 */
+		kiosk?: boolean;
+		/**
+		 * Default window title.
+		 * Default: "Electron".
+		 */
+		title?: string;
+		/**
+		 * The window icon, when omitted on Windows the executable’s icon would be used as window icon.
+		 */
+		icon?: string;
+		/**
+		 * Whether window should be shown when created.
+		 * Default: true.
+		 */
+		show?: boolean;
+		/**
+		 * Specify false to create a Frameless Window.
+		 * Default: true.
+		 */
+		frame?: boolean;
+		/**
+		 * Specify parent window.
+		 * Default: null.
+		 */
+		parent?: BrowserWindowType;
+		/**
+		 * Whether this is a modal window. This only works when the window is a child window.
+		 * Default: false.
+		 */
+		modal?: boolean;
+		/**
+		 * Whether the web view accepts a single mouse-down event that simultaneously activates the window.
+		 * Default: false.
+		 */
+		acceptFirstMouse?: boolean;
+		/**
+		 * Whether to hide cursor when typing.
+		 * Default: false.
+		 */
+		disableAutoHideCursor?: boolean;
+		/**
+		 * Auto hide the menu bar unless the Alt key is pressed.
+		 * Default: true.
+		 */
+		autoHideMenuBar?: boolean;
+		/**
+		 * Enable the window to be resized larger than screen.
+		 * Default: false.
+		 */
+		enableLargerThanScreen?: boolean;
+		/**
+		 * Window’s background color as Hexadecimal value, like #66CD00 or #FFF or #80FFFFFF (alpha is supported).
+		 * Default: #FFF (white).
+		 */
+		backgroundColor?: string;
+		/**
+		 * Whether window should have a shadow.
+		 * Note: This is only implemented on macOS.
+		 * Default: true.
+		 */
+		hasShadow?: boolean;
+		/**
+		 * Forces using dark theme for the window.
+		 * Note: Only works on some GTK+3 desktop environments.
+		 * Default: false.
+		 */
+		darkTheme?: boolean;
+		/**
+		 * Makes the window transparent.
+		 * Default: false.
+		 */
+		transparent?: boolean;
+		/**
+		 * The type of window, default is normal window.
+		 */
+		type?: BrowserWindowType;
+		/**
+		 * The style of window title bar.
+		 */
+		titleBarStyle?: 'default' | 'hidden' | 'hidden-inset';
+		/**
+		 * Use WS_THICKFRAME style for frameless windows on Windows
+		 */
+		thickFrame?: boolean;
+		/**
+		 * Add a type of vibrancy effect to the window, only on macOS
+		 */
+		vibrancy?: VibrancyType;
+		/**
+		 * Settings of web page’s features.
+		 */
+		webPreferences?: WebPreferences;
     }
 
     interface WebPreferences {
-        devTools?: boolean
-        nodeIntegration?: boolean
-        preload?: string
-        session?: Object
-        partition?: string
-        zoomFactor?: number
-        javascript?: boolean
-        webSecurity?: boolean
-        allowDisplayingInsecureContent?: boolean
-        allowRunningInsecureContent?: boolean
-        images?: boolean
-        textAreasAreResizable?: boolean
-        webgl?: boolean
-        webaudio?: boolean
-        plugins?: boolean
-        experimentalFeatures?: boolean
-        experimentalCanvasFeatures?: boolean
-        directWrite?: boolean
-        scrollBounce?: boolean
-        blinkFeatures?: string
-        disableBlinkFeatures?: string
-        defaultFontFamily?: {
-            standard?: string
-            serif?: string
-            sansSerif?: string
-            monospace?: string
-        }
-        defaultFontSize?: number
-        defaultMonospaceFontSize?: number
-        minimumFontSize?: number
-        defaultEncoding?: string
-        backgroundThrottling?: boolean
-        offscreen?: boolean
-        sandbox?: boolean
-    }
-
-    interface Paths {
-        // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
-        home?: string;
-        appData?: string;
-        userData?: string;
-        temp?: string;
-        exe?: string;
-        module?: string;
-        desktop?: string;
-        documents?: string;
-        downloads?: string;
-        music?: string;
-        pictures?: string;
-        videos?: string;
-    }
-
-    interface Switches {
-        // https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
-        'ignore-connection-limit'?: string;
-        'disable-http-cache'?: boolean;
-        'disable-http2'?: boolean;
-        'remote-debugging-port'?: number;
-        'js-flags'?: string;
-        'proxy-server'?: string;
-        'proxy-bypass-list'?: string;
-        'proxy-pac-url'?: string;
-        'no-proxy-server'?: boolean;
-        'host-rules'?: string;
-        'host-resolve-rules'?: string;
-        'auth-server-whitelist'?: string;
-        'auth-negotiate-delegate-whitelist'?: string;
-        'ignore-certificate-errors'?: string;
-        'ppapi-flash-path'?: string;
-        'ppapi-flash-version'?: string;
-        'log-net-log'?: string;
-        'ssl-version-fallback-min'?: string;
-        'cipher-suite-blacklist'?: string;
-        'disable-renderer-backgrounding'?: string;
-        'enable-logging'?: boolean;
-        'v'?: string;
-        'vmodule'?: string;
-    }
-
+/**
+		 * Whether to enable DevTools.
+		 * If it is set to false, can not use BrowserWindow.webContents.openDevTools() to open DevTools.
+		 * Default: true.
+		 */
+		devTools?: boolean;
+		/**
+		 * Whether node integration is enabled.
+		 * Default: true.
+		 */
+		nodeIntegration?: boolean;
+		/**
+		 * Specifies a script that will be loaded before other scripts run in the page.
+		 * This script will always have access to node APIs no matter whether node integration is turned on or off.
+		 * The value should be the absolute file path to the script.
+		 * When node integration is turned off, the preload script can reintroduce
+		 * Node global symbols back to the global scope.
+		 */
+		preload?: string;
+		/**
+		 * Sets the session used by the page. Instead of passing the Session object directly,
+		 * you can also choose to use the partition option instead, which accepts a partition string.
+		 * When both session and partition are provided, session would be preferred.
+		 * Default: the default session.
+		 */
+		session?: Object;
+		/**
+		 * Sets the session used by the page according to the session’s partition string.
+		 * If partition starts with persist:, the page will use a persistent session available
+		 * to all pages in the app with the same partition. if there is no persist: prefix,
+		 * the page will use an in-memory session. By assigning the same partition,
+		 * multiple pages can share the same session.
+		 * Default: the default session.
+		 */
+		partition?: string;
+		/**
+		 * The default zoom factor of the page, 3.0 represents 300%.
+		 * Default: 1.0.
+		 */
+		zoomFactor?: number;
+		/**
+		 * Enables JavaScript support.
+		 * Default: true.
+		 */
+		javascript?: boolean;
+		/**
+		 * When setting false, it will disable the same-origin policy (Usually using testing
+		 * websites by people), and set allowDisplayingInsecureContent and allowRunningInsecureContent
+		 * to true if these two options are not set by user.
+		 * Default: true.
+		 */
+		webSecurity?: boolean;
+		/**
+		 * Allow an https page to display content like images from http URLs.
+		 * Default: false.
+		 */
+		allowDisplayingInsecureContent?: boolean;
+		/**
+		 * Allow a https page to run JavaScript, CSS or plugins from http URLs.
+		 * Default: false.
+		 */
+		allowRunningInsecureContent?: boolean;
+		/**
+		 * Enables image support.
+		 * Default: true.
+		 */
+		images?: boolean;
+		/**
+		 * Make TextArea elements resizable.
+		 * Default: true.
+		 */
+		textAreasAreResizable?: boolean;
+		/**
+		 * Enables WebGL support.
+		 * Default: true.
+		 */
+		webgl?: boolean;
+		/**
+		 * Enables WebAudio support.
+		 * Default: true.
+		 */
+		webaudio?: boolean;
+		/**
+		 * Whether plugins should be enabled.
+		 * Default: false.
+		 */
+		plugins?: boolean;
+		/**
+		 * Enables Chromium’s experimental features.
+		 * Default: false.
+		 */
+		experimentalFeatures?: boolean;
+		/**
+		 * Enables Chromium’s experimental canvas features.
+		 * Default: false.
+		 */
+		experimentalCanvasFeatures?: boolean;
+		/**
+		 * Enables DirectWrite font rendering system on Windows.
+		 * Default: true.
+		 */
+		directWrite?: boolean;
+		/**
+		 * Enables scroll bounce (rubber banding) effect on macOS.
+		 * Default: false.
+		 */
+		scrollBounce?: boolean;
+		/**
+		 * A list of feature strings separated by ",", like CSSVariables,KeyboardEventKey to enable.
+		 */
+		blinkFeatures?: string;
+		/**
+		 * A list of feature strings separated by ",", like CSSVariables,KeyboardEventKey to disable.
+		 */
+		disableBlinkFeatures?: string;
+		/**
+		 * Sets the default font for the font-family.
+		 */
+		defaultFontFamily?: {
+			/**
+			 * Default: Times New Roman.
+			 */
+			standard?: string;
+			/**
+			 * Default: Times New Roman.
+			 */
+			serif?: string;
+			/**
+			 * Default: Arial.
+			 */
+			sansSerif?: string;
+			/**
+			 * Default: Courier New.
+			 */
+			monospace?: string;
+		};
+		/**
+		 * Default: 16.
+		 */
+		defaultFontSize?: number;
+		/**
+		 * Default: 13.
+		 */
+		defaultMonospaceFontSize?: number;
+		/**
+		 * Default: 0.
+		 */
+		minimumFontSize?: number;
+		/**
+		 * Default: ISO-8859-1.
+		 */
+		defaultEncoding?: string;
+		/**
+		 * Whether to throttle animations and timers when the page becomes background.
+		 * Default: true.
+		 */
+		backgroundThrottling?: boolean;
+		/**
+		 * Whether to enable offscreen rendering for the browser window.
+		 * Default: false.
+		 */
+		offscreen?: boolean;
+		/**
+		 * Whether to enable Chromium OS-level sandbox.
+		 * Default: false.
+		 */
+		sandbox?: boolean;
+	}
 
     interface Certificate {
         /**
@@ -512,20 +1089,6 @@ declare namespace Nightmare {
         * Country or region
         */
         country: string
-    }
-
-    interface LoginRequest {
-        method: string
-        url: string
-        referrer: string
-    }
-
-    interface LoginAuthInfo {
-        isProxy: boolean
-        scheme: string
-        host: string
-        port: number
-        realm: string
     }
 
     interface FindInPageOptions {
@@ -742,6 +1305,41 @@ declare namespace Nightmare {
         landscape?: boolean
     }
 
+    interface Paths {
+        // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
+        home?: string;
+        appData?: string;
+        userData?: string;
+        temp?: string;
+        exe?: string;
+        module?: string;
+        desktop?: string;
+        documents?: string;
+        downloads?: string;
+        music?: string;
+        pictures?: string;
+        videos?: string;
+    }
+
+    interface Cookie {
+        domain?: string;
+        hostOnly?: boolean;
+        httpOnly?: boolean;
+        name?: string;
+        path?: string;
+        secure?: boolean;
+        session?: boolean;
+        value?: string;
+        expirationDate?: number;
+    }
+
+    interface Cookies {
+        get(query?: Cookie): Promise<Cookie[]>;
+        set(name: string, value: string): Nightmare;
+        set(cookie: Cookie): Nightmare;
+        clearAll(): Nightmare;
+    }
+
     export interface EngineVersions {
         electron: string
         chrome: string
@@ -754,6 +1352,20 @@ declare namespace Nightmare {
     interface BluetoothDevice {
         deviceName: string
         deviceId: string
+    }
+
+    interface LoginRequest {
+        method: string
+        url: string
+        referrer: string
+    }
+
+    interface LoginAuthInfo {
+        isProxy: boolean
+        scheme: string
+        host: string
+        port: number
+        realm: string
     }
 
     // -- Supporting types --
@@ -781,9 +1393,39 @@ declare namespace Nightmare {
         MHTML: string
     }
 
+    type Switches = {
+        // https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
+        'ignore-connection-limit'?: string;
+        'disable-http-cache'?: boolean;
+        'disable-http2'?: boolean;
+        'remote-debugging-port'?: number;
+        'js-flags'?: string;
+        'proxy-server'?: string;
+        'proxy-bypass-list'?: string;
+        'proxy-pac-url'?: string;
+        'no-proxy-server'?: boolean;
+        'host-rules'?: string;
+        'host-resolve-rules'?: string;
+        'auth-server-whitelist'?: string;
+        'auth-negotiate-delegate-whitelist'?: string;
+        'ignore-certificate-errors'?: string;
+        'ppapi-flash-path'?: string;
+        'ppapi-flash-version'?: string;
+        'log-net-log'?: string;
+        'ssl-version-fallback-min'?: string;
+        'cipher-suite-blacklist'?: string;
+        'disable-renderer-backgrounding'?: string;
+        'enable-logging'?: boolean;
+        'v'?: string;
+        'vmodule'?: string;
+    }
+
     type BrowserWindowType = BrowserWindowTypeLinux | BrowserWindowTypeMac | BrowserWindowTypeWindows
+
     type BrowserWindowTypeLinux = 'desktop' | 'dock' | 'toolbar' | 'splash' | 'notification'
+
     type BrowserWindowTypeMac = 'desktop' | 'textured'
+
     type BrowserWindowTypeWindows = 'toolbar'
 
     type NewWindowDisposition = 'default' | 'foreground-tab' | 'background-tab' | 'new-window' | 'save-to-disk' | 'other'
