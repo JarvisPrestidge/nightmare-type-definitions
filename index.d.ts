@@ -606,7 +606,7 @@ declare namespace Nightmare {
          * The command line switches used by the Chrome browser that are also supported by Electron.
          * Here's a list of supported Chrome command line switches: https://github.com/atom/electron/blob/master/docs/api/chrome-command-line-switches.md
          */
-        switches?: object
+        switches?: Switches
         /**
          * The path to prebuilt Electron binary. This is useful for testing on different version Electron.
          * Note that Nightmare only supports the version this package depending on. Please use this option at your own risk.
@@ -1395,6 +1395,7 @@ declare namespace Nightmare {
 
     type Switches = {
         // https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
+
         'ignore-connection-limit'?: string;
         'disable-http-cache'?: boolean;
         'disable-http2'?: boolean;

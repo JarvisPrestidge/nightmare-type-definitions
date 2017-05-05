@@ -12,8 +12,6 @@
                 "-p",
                 "."
             ],
-            "isBackground": true,
-            "promptOnClose": true,
             "problemMatcher": "$tsc-watch"
         },
         {
